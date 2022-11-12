@@ -99,7 +99,7 @@ local Window = Parvus.Utilities.UI:Window({
             Mouse = true,Callback = function(Key,KeyDown)
                 Trigger = Window.Flags["Trigger/Enabled"] and KeyDown
                 if Window.Flags['Trigger/Enabled'] == true then
-                    mouse1press()
+                    m1click()
                 end
             end})
             TriggerSection:Slider({Name = "Field Of View",Flag = "Trigger/FieldOfView",Min = 0,Max = 500,Value = 25})
@@ -416,9 +416,9 @@ Parvus.Utilities.Misc:NewThreadLoop(0,function()
         BodyParts = Window.Flags["Trigger/BodyParts"]
     })
 
-    mouse1press()
+    m1click()
 
-    if TriggerHitbox then mouse1press()
+    if TriggerHitbox then m1click()
         task.wait(Window.Flags["Trigger/Delay"])
         if Window.Flags["Trigger/HoldMode"] then
             while task.wait() do
