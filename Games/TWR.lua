@@ -16,9 +16,9 @@ local RemoteEvent = ReplicatedStorage:WaitForChild("RE")
 local vim = game:GetService('VirtualInputManager')
 
 local function m1click() 
-    vim:SendMouseButtonEvent(545.5,307,1,true,game,0)
+    vim:SendMouseButtonEvent(545.5,307,0,true,game,0)
     wait()
-    vim:SendMouseButtonEvent(545.5,307,1,false,game,0)
+    vim:SendMouseButtonEvent(545.5,307,0,false,game,0)
 end
 
 local OCIFunction for Index,Function in pairs(getgc()) do
