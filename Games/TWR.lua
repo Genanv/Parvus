@@ -415,8 +415,6 @@ Parvus.Utilities.Misc:NewThreadLoop(0,function()
         BodyParts = Window.Flags["Trigger/BodyParts"]
     })
 
-    m1click()
-
     if TriggerHitbox then m1click()
         task.wait(Window.Flags["Trigger/Delay"])
         if Window.Flags["Trigger/HoldMode"] then
@@ -431,7 +429,7 @@ Parvus.Utilities.Misc:NewThreadLoop(0,function()
                     BodyParts = Window.Flags["Trigger/BodyParts"]
                 }) if not TriggerHitbox or not Trigger then break end
             end
-        end mouse1release()
+        end
     end
 end)
 
