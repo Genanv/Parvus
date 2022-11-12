@@ -13,6 +13,14 @@ local Ray = require(ReplicatedStorage.SharedModules.Utilities.Ray)
 local GuiModule = require(LocalPlayer.PlayerScripts.Client.Gui)
 local RemoteEvent = ReplicatedStorage:WaitForChild("RE")
 
+local vim = game:GetService('VirtualInputManager')
+
+local function m1click() 
+    vim:SendMouseButtonEvent(545.5,307,1,true,game,0)
+    wait()
+    vim:SendMouseButtonEvent(545.5,307,1,false,game,0)
+end
+
 local OCIFunction for Index,Function in pairs(getgc()) do
     if islclosure(Function) and getconstants(Function)[1] == "GetCC" then
         OCIFunction = Function
@@ -88,7 +96,12 @@ local Window = Parvus.Utilities.UI:Window({
             TriggerSection:Toggle({Name = "Distance Check",Flag = "Trigger/DistanceCheck",Value = false})
             TriggerSection:Toggle({Name = "Dynamic FOV",Flag = "Trigger/DynamicFOV",Value = false})
             TriggerSection:Keybind({Name = "Keybind",Flag = "Trigger/Keybind",Value = "MouseButton2",
-            Mouse = true,Callback = function(Key,KeyDown) Trigger = Window.Flags["Trigger/Enabled"] and KeyDown end})
+            Mouse = true,Callback = function(Key,KeyDown)
+                Trigger = Window.Flags["Trigger/Enabled"] and KeyDown
+                if Window.Flags['Trigger/Enabled'] == true then
+                    mouse1press()
+                end
+            end})
             TriggerSection:Slider({Name = "Field Of View",Flag = "Trigger/FieldOfView",Min = 0,Max = 500,Value = 25})
             TriggerSection:Slider({Name = "Distance",Flag = "Trigger/Distance",Min = 25,Max = 1000,Value = 250,Unit = "meters"})
             TriggerSection:Slider({Name = "Delay",Flag = "Trigger/Delay",Min = 0,Max = 1,Precise = 2,Value = 0.15})
@@ -296,6 +309,7 @@ local function GetHitbox(Config)
                 local Magnitude = (Vector2.new(ScreenPosition.X, ScreenPosition.Y) - UserInputService:GetMouseLocation()).Magnitude
                 if OnScreen and Magnitude < FieldOfView then
                     FieldOfView,ClosestHitbox = Magnitude,{NPC,NPC,Hitbox,Distance,ScreenPosition}
+                    m1click()
                 end
             end
         end
@@ -401,6 +415,8 @@ Parvus.Utilities.Misc:NewThreadLoop(0,function()
         Distance = Window.Flags["Trigger/Distance"],
         BodyParts = Window.Flags["Trigger/BodyParts"]
     })
+
+    mouse1press()
 
     if TriggerHitbox then mouse1press()
         task.wait(Window.Flags["Trigger/Delay"])
