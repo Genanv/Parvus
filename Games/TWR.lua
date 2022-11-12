@@ -16,7 +16,7 @@ local RemoteEvent = ReplicatedStorage:WaitForChild("RE")
 local vim = game:GetService('VirtualInputManager')
 
 local function m1click()
-    wait(math.random(0.221,0.57))
+    wait(math.random(0.221,0.47))
     vim:SendMouseButtonEvent(1000,500,0,true,game,0)
     wait()
     vim:SendMouseButtonEvent(1000,500,0,false,game,0)
