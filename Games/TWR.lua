@@ -405,6 +405,9 @@ RunService.Heartbeat:Connect(function()
 end)
 Parvus.Utilities.Misc:NewThreadLoop(0,function()
     if not Trigger then return end
+                        
+    m1click()
+                        
     local TriggerHitbox = GetHitbox({
         Enabled = Window.Flags["Trigger/Enabled"],
         WallCheck = Window.Flags["Trigger/WallCheck"],
@@ -415,7 +418,7 @@ Parvus.Utilities.Misc:NewThreadLoop(0,function()
         BodyParts = Window.Flags["Trigger/BodyParts"]
     })
 
-    if TriggerHitbox then m1click()
+    if TriggerHitbox then
         task.wait(Window.Flags["Trigger/Delay"])
         if Window.Flags["Trigger/HoldMode"] then
             while task.wait() do
