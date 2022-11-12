@@ -99,7 +99,6 @@ local Window = Parvus.Utilities.UI:Window({
             Mouse = true,Callback = function(Key,KeyDown)
                 Trigger = Window.Flags["Trigger/Enabled"] and KeyDown
                 if Window.Flags['Trigger/Enabled'] == true then
-                    m1click()
                 end
             end})
             TriggerSection:Slider({Name = "Field Of View",Flag = "Trigger/FieldOfView",Min = 0,Max = 500,Value = 25})
@@ -308,6 +307,7 @@ local function GetHitbox(Config)
                 local ScreenPosition,OnScreen = Camera:WorldToViewportPoint(Hitbox.Position)
                 local Magnitude = (Vector2.new(ScreenPosition.X, ScreenPosition.Y) - UserInputService:GetMouseLocation()).Magnitude
                 if OnScreen and Magnitude < FieldOfView then
+                     m1click()
                     FieldOfView,ClosestHitbox = Magnitude,{NPC,NPC,Hitbox,Distance,ScreenPosition}
                 end
             end
@@ -405,8 +405,6 @@ RunService.Heartbeat:Connect(function()
 end)
 Parvus.Utilities.Misc:NewThreadLoop(0,function()
     if not Trigger then return end
-                        
-    m1click()
                         
     local TriggerHitbox = GetHitbox({
         Enabled = Window.Flags["Trigger/Enabled"],
