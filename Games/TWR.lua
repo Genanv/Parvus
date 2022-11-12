@@ -16,9 +16,9 @@ local RemoteEvent = ReplicatedStorage:WaitForChild("RE")
 local vim = game:GetService('VirtualInputManager')
 
 local function m1click() 
-    vim:SendMouseButtonEvent(500,500,0,true,game,0)
+    vim:SendMouseButtonEvent(1000,500,0,true,game,0)
     wait()
-    vim:SendMouseButtonEvent(500,500,0,false,game,0)
+    vim:SendMouseButtonEvent(1000,500,0,false,game,0)
 end
 
 local OCIFunction for Index,Function in pairs(getgc()) do
@@ -303,13 +303,13 @@ local function GetHitbox(Config)
         for Index,BodyPart in pairs(Config.BodyParts) do
             local Hitbox = NPC:FindFirstChild(BodyPart) if not Hitbox then continue end
             local Distance = (Hitbox.Position - Camera.CFrame.Position).Magnitude
+            m1click()
             if WallCheck(Config.WallCheck,Hitbox,NPC)
                 and DistanceCheck(Config.DistanceCheck,Distance,Config.Distance) then
                 local ScreenPosition,OnScreen = Camera:WorldToViewportPoint(Hitbox.Position)
                 local Magnitude = (Vector2.new(ScreenPosition.X, ScreenPosition.Y) - UserInputService:GetMouseLocation()).Magnitude
                 if OnScreen and Magnitude < FieldOfView then
                     FieldOfView,ClosestHitbox = Magnitude,{NPC,NPC,Hitbox,Distance,ScreenPosition}
-                    m1click()
                 end
             end
         end
